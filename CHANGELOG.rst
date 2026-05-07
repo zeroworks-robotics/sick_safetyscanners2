@@ -2,6 +2,13 @@
 Changelog for package sick_safetyscanners2
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* Updated maintainer list in package.xml
+* Added error_info_codes from status_overview service to documentation
+* Added status_overview service to return additional device status information
+* Contributors: Christian Eichmann
+
 1.0.4 (2024-09-24)
 ------------------
 * possible fix for out of range
