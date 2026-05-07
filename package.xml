@@ -4,7 +4,8 @@
   <name>sick_safetyscanners2</name>
   <version>1.0.4</version>
   <description>ROS2 Driver for the SICK safetyscanners</description>
-  <maintainer email="puck@fzi.de">Lennart Puck</maintainer>
+  <maintainer email="eichmann@fzi.de">Christian Eichmann</maintainer>
+  <maintainer email="trapp@fzi.de">Thomas Trapp</maintainer>
   <author>Lennart Puck</author>
   <license>ALv2</license>
 
