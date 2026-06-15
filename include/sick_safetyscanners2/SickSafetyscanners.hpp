@@ -71,6 +71,7 @@ public:
 
     boost::asio::ip::address_v4 m_sensor_ip;
     boost::asio::ip::address_v4 m_interface_ip;
+    std::string m_scan_topic = "scan";
     std::string m_frame_id;
     double m_time_offset = 0.0;
     double m_range_min = 0.0;
@@ -107,6 +108,7 @@ public:
    * @param node Node
    */
   template <typename NodeT> static void initializeParameters(NodeT &node) {
+    node.template declare_parameter<std::string>("scan_topic", "scan");
     node.template declare_parameter<std::string>("frame_id", "scan");
     node.template declare_parameter<std::string>("sensor_ip", "192.168.1.11");
     node.template declare_parameter<std::string>("host_ip", "192.168.1.9");
@@ -125,6 +127,9 @@ public:
     node.template declare_parameter<bool>("application_io_data", true);
     node.template declare_parameter<bool>("use_persistent_config", false);
     node.template declare_parameter<float>("min_intensities", 0.f);
+    node.template declare_parameter<double>("min_range", 0.1);
+    // max_range <= 0.0 means "use the sensor type code maximum range"
+    node.template declare_parameter<double>("max_range", 0.0);
 
     node.template declare_parameter<double>("expected_frequency", 34);
     node.template declare_parameter<double>("frequency_tolerance", 0.1);
@@ -142,6 +147,9 @@ public:
    * @param node Node
    */
   template <typename NodeT> void loadParameters(NodeT &node) {
+    node.template get_parameter<std::string>("scan_topic", m_config.m_scan_topic);
+    RCLCPP_INFO(getLogger(), "scan_topic: %s", m_config.m_scan_topic.c_str());
+
     node.template get_parameter<std::string>("frame_id", m_config.m_frame_id);
     RCLCPP_INFO(getLogger(), "frame_id: %s", m_config.m_frame_id.c_str());
 
@@ -248,6 +256,12 @@ public:
     node.template get_parameter<double>("min_intensities",
                                         m_config.m_min_intensities);
     RCLCPP_INFO(getLogger(), "min_intensities: %f", m_config.m_min_intensities);
+
+    node.template get_parameter<double>("min_range", m_config.m_range_min);
+    RCLCPP_INFO(getLogger(), "min_range: %f", m_config.m_range_min);
+
+    node.template get_parameter<double>("max_range", m_config.m_range_max);
+    RCLCPP_INFO(getLogger(), "max_range: %f", m_config.m_range_max);
 
     node.template get_parameter<double>("expected_frequency",
                                         m_config.m_expected_frequency);
