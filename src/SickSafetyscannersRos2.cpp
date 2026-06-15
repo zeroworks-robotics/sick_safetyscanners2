@@ -46,7 +46,8 @@ SickSafetyscannersRos2::SickSafetyscannersRos2()
 
   // init publishers and services
   m_laser_scan_publisher =
-      this->create_publisher<sensor_msgs::msg::LaserScan>("scan", 1);
+      this->create_publisher<sensor_msgs::msg::LaserScan>(m_config.m_scan_topic,
+                                                          1);
   m_extended_laser_scan_publisher = this->create_publisher<
       sick_safetyscanners2_interfaces::msg::ExtendedLaserScan>("extended_scan",
                                                                1);
